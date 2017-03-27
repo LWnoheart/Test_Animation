@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Masonry.h"
+#define WS(weakSelf)  __weak __typeof(&*self)weakSelf = self;
+@interface SuperViewController : UIViewController<UICollectionViewDelegate>
 
-@interface SuperViewController : UIViewController
+@property (nonatomic,strong)NSArray<NSString *> *selectArray;
+
+-(void)resetAnimationUI;
+
+-(void)logSomething;
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath;
 
 @end

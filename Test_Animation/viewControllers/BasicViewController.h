@@ -6,8 +6,8 @@
 //  Copyright © 2017年 李巍. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "SuperViewController.h"
 
-@interface BasicViewController : UIViewController
+@interface BasicViewController : SuperViewController
 
 @end
