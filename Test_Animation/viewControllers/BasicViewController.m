@@ -20,7 +20,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self resetAnimationUI];
     
-    NSArray *items = @[@"放大",@"UIView弹簧",@"JNW弹簧放大",@"JNW弹簧旋转",@"JNW弹簧移动",@"JNW弹簧旋转放大"];
+    NSArray *items = @[@"放大",@"UIView弹簧",@"JNW弹簧放大",@"JNW弹簧旋转",@"JNW弹簧移动",@"JNW弹簧旋转放大",@"CAAnimation旋转放大移动"];
     self.selectArray = items;
     
     
@@ -129,6 +129,35 @@
             [self.redBall.layer addAnimation:rotate forKey:rotate.keyPath];
             self.redBall.transform = CGAffineTransformRotate(self.redBall.transform, M_PI);
             //CGAffineTransformMakeScale,包含make在其中，属于创建一个其他值为初始的，scale为特定的transform。CGAffineTransformScale需要三个参数，表示在传入transform的前提下改变scale（特定）的值，适用于前后都改变transform的情况下。
+        }
+            break;
+        case 6:
+        {
+            CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+            scaleAnimation.fromValue = @1;
+            scaleAnimation.toValue = @2;
+            
+            CABasicAnimation *rotateAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+            rotateAnimation.fromValue = @0;
+            rotateAnimation.toValue = @M_PI;
+            
+            CABasicAnimation *moveAnimation = [CABasicAnimation animationWithKeyPath:@"transform.translation.x"];
+            moveAnimation.fromValue = @0;
+            moveAnimation.toValue = @200;
+            
+            CAAnimationGroup *group = [CAAnimationGroup animation];
+            group.duration = 1.5f;
+            group.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+            //group.removedOnCompletion = NO;
+            //group.fillMode = kCAFillModeForwards;
+            
+            //group.autoreverses = YES;
+            
+            
+            
+            group.animations = @[scaleAnimation,rotateAnimation,moveAnimation];
+            
+            [self.redBall.layer addAnimation:group forKey:@"redAnimation_group"];
         }
             break;
             
